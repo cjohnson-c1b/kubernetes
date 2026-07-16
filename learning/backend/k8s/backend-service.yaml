@@ -1,0 +1,13 @@
+# provide stable network endpoint for backend
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: pipeline 
+    tier: backend 
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: http

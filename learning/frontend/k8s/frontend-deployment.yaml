@@ -1,0 +1,25 @@
+# runs frontend pods
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+data:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pipeline
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: pipeline 
+        tier: frontend
+        track: stable
+    spec:
+      containers:
+      - name: frontend-container
+        image: frontend 
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/nginx","-s","quit"]  # tells NGINX to shutdown

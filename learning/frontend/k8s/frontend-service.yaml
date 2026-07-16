@@ -1,0 +1,15 @@
+# provide stable network endpoint for frontend
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  type: LoadBalancer  # 
+  selector:
+    matchLabels:
+      app: pipeline
+      tier: frontend
+  ports:
+  - protocol: TCP 
+    port: 8080
+    targetPort: 8080

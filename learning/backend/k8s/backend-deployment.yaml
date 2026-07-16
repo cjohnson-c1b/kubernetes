@@ -1,0 +1,22 @@
+# run backend pods
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment 
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pipeline
+      tier: backend 
+  template:
+    metadata:
+      labels:
+        app: pipeline 
+        tier: backend 
+    spec:
+      containers:
+      - name: backend-containers
+        image: backend 
+        ports:
+        - containerPort: 8080
