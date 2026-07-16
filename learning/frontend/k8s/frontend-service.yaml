@@ -6,7 +6,6 @@ metadata:
 spec:
   type: LoadBalancer  # 
   selector:
-    matchLabels:
       app: pipeline
       tier: frontend
   ports:

@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend-deployment
-data:
+spec:
   replicas: 3
   selector:
     matchLabels:
@@ -22,4 +22,4 @@ data:
         lifecycle:
           preStop:
             exec:
-              command: ["/nginx","-s","quit"]  # tells NGINX to shutdown
+              command: ["/usr/bin/nginx","-s","quit"]  # tells NGINX to shutdown

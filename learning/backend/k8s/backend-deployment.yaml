@@ -14,9 +14,11 @@ spec:
       labels:
         app: pipeline 
         tier: backend 
+        track: stable
     spec:
       containers:
-      - name: backend-containers
+      - name: backend-container
         image: backend 
         ports:
-        - containerPort: 8080
+        - name: http
+          containerPort: 8080
