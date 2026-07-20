@@ -1,0 +1,28 @@
+# run backend pods
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend 
+  namespace: pipeline
+  labels:
+    app: pipeline
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pipeline
+      tier: backend 
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: pipeline 
+        tier: backend 
+        track: stable
+    spec:
+      containers:
+      - name: backend-container
+        image: # tbd post dockerfile 
+        ports:
+        - name: http
+          containerPort: 8080
