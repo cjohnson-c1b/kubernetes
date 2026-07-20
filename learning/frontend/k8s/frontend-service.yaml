@@ -3,8 +3,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend-service
+  namespace: pipeline
 spec:
-  type: LoadBalancer  # 
+  type: LoadBalancer  # expose application to internet
   selector:
       app: pipeline
       tier: frontend
