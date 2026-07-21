@@ -15,12 +15,11 @@ spec:
       labels:
         app: pipeline 
         tier: frontend
-        track: stable
     spec:
       containers:
       - name: frontend-container
-        image: frontend 
+        image: frontend-app:1.1 
         lifecycle:
           preStop:
             exec:
-              command: ["/usr/bin/nginx","-s","quit"]  # tells NGINX to shutdown
+              command: ["nginx","-s","quit"]  # tells NGINX to shutdown
