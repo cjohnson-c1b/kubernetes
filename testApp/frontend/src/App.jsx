@@ -1,20 +1,72 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import React, { useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const[username, setUsername] = useState("");
+  const[password, setPassword] = useState("");
+
+  async function handleLogin() {
+    // interact with backend
+    const payload = {username: username, password: password}
+    console.log("here")
+
+    try {
+      const response = await fetch('http://localhost:8080/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json' 
+        },
+        body: JSON.stringify(payload)
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Success:', data);
+    } catch (error) {
+      console.error("Error logging in: ", error);
+    }
+  }
 
   return (
     <>
       <section id="center">
-       <h1> FRONTEND ACTIVE </h1>
-      </section>
+        <div className="login-container">
+          <div className="login-box">
+            <h2>Login</h2>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+            <form onSubmit={handleLogin}>
+              <div className="form-group">
+                <label>Username</label>
+                <input
+                  type="username"
+                  value={username}
+                  placeholder="Enter your username"
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Password</label>
+                <input
+                  type="password"
+                  value={password}
+                  placeholder="Enter your password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+
+              <button type="submit">
+                Login
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
     </>
   )
 }

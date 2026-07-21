@@ -8,6 +8,7 @@ spec:
   selector:
     app: pipeline 
     tier: backend 
+    track: stable
   ports:
   - protocol: TCP
     port: 8080

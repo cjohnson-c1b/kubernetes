@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: backend-container
-        image: # tbd post dockerfile 
+        image: backend-app:1.1
         ports:
         - name: http
           containerPort: 8080
