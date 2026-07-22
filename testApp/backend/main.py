@@ -1,8 +1,6 @@
 from flask import Flask, request
-from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
 
 @app.route('/')
 def hello():
@@ -15,7 +13,7 @@ credentials = {
 	"test2": "test2",
 }
 
-@app.route('/login', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 def handleLogin():
 	return "Login Successful"
 	
