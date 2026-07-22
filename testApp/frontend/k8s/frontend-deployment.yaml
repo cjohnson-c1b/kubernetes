@@ -5,7 +5,7 @@ metadata:
   name: frontend
   namespace: pipeline
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: pipeline
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: frontend-container
-        image: frontend-app:1.1 
+        image: frontend-app:1.3 
         lifecycle:
           preStop:
             exec:
