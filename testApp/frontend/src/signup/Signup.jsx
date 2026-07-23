@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
-import { Routes,Route,useNavigate } from 'react-router-dom';
-import Home from './home/Home';
-import Signup from './signup/Signup';
-import './App.css';
+import '../App.css';
 
 
-function Login() {
+function Signup() {
   const[username, setUsername] = useState("");
   const[password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const[confirmPassword, setConfirmPassword] = useState("");
 
-  async function handleLogin() {
-    // interact with backend
+  async function handleSignup() {
+    // confirm password
+    if(password != confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+    // api call
     const payload = {username: username, password: password};
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch('/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json' 
@@ -28,23 +30,22 @@ function Login() {
       
       const data = await response.json();
       console.log('Success:', data);
-      navigate("/home");
-      
+      navigate('/')
+
     } catch (error) {
-      console.error("Error logging in: ", error);
+      console.error("Error creating account: ", error);
     }
   }
 
-  function handleSignup() { navigate("/signup"); }
 
   return (
     <>
       <section id="center">
-        <div className="login-container">
-          <div className="login-box">
-            <h2>Login</h2>
+        <div className="signup-container">
+          <div className="signup-box">
+            <h2> Sign Up </h2>
 
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleSignup}>
               <div className="form-group">
                 <label>Username</label>
                 <input
@@ -67,23 +68,24 @@ function Login() {
                 />
               </div>
 
-              <button type="submit"> Login </button>
-              <div className="signup-text" role="button" onClick={handleSignup}> Not a user? Click to sign up. </div>
+              <div className="form-group">
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  placeholder="Re-enter your password"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </div>
+
+              <button type="submit"> Signup </button>
             </form>
           </div>
         </div>
       </section>
     </>
+    
   );
 }
-// -----------------------------------------------
-function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Login/>}/>
-      <Route path="/home" element={<Home/>}/>
-      <Route path="/signup" element={<Signup/>}/>
-    </Routes>
-  );
-}
-export default App;
+
+export default Signup;

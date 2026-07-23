@@ -238,3 +238,24 @@ button {
 button:hover {
   background-color: #005ea6;
 }
+
+.signup-text {
+  color: black;
+  font-size: smaller;
+  cursor: pointer;
+ }
+
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.signup-box {
+  background: white;
+  padding: 30px;
+  width: 320px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
