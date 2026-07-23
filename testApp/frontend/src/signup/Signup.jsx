@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
 
@@ -6,15 +7,18 @@ function Signup() {
   const[username, setUsername] = useState("");
   const[password, setPassword] = useState("");
   const[confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
-  async function handleSignup() {
+  async function handleSignup(e) {
+    e.preventDefault();
+    
     // confirm password
     if(password != confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-    // api call
-    const payload = {username: username, password: password};
+
+    const payload = {username: username, password: password};      
     try {
       const response = await fetch('/api/signup', {
         method: 'POST',
@@ -24,17 +28,17 @@ function Signup() {
         body: JSON.stringify(payload)
       });
 
-      if (!response.ok) {
+      if (!response.ok) 
         throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+      else 
+        navigate('/')
       
       const data = await response.json();
       console.log('Success:', data);
-      navigate('/')
 
     } catch (error) {
       console.error("Error creating account: ", error);
-    }
+    }   
   }
 
 

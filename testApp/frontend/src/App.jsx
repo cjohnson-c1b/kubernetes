@@ -10,8 +10,9 @@ function Login() {
   const[password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  async function handleLogin() {
+  async function handleLogin(e) {
     // interact with backend
+    e.preventDefault();
     const payload = {username: username, password: password};
     try {
       const response = await fetch('/api/login', {
@@ -22,14 +23,14 @@ function Login() {
         body: JSON.stringify(payload)
       });
 
-      if (!response.ok) {
+      if (!response.ok) 
         throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+      else
+        navigate("/home"); 
       
       const data = await response.json();
       console.log('Success:', data);
-      navigate("/home");
-      
+
     } catch (error) {
       console.error("Error logging in: ", error);
     }
